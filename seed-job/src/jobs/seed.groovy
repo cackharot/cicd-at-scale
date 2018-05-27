@@ -8,8 +8,9 @@ job('seed') {
     steps {
         gradle 'clean test'
         dsl {
-            external 'jobs/**/*Jobs.groovy'
+            external 'jobs/**/*Job.groovy'
             additionalClasspath 'src/main/groovy'
+            removeAction('DELETE')
         }
     }
     publishers {

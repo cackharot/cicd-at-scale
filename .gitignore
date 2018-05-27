@@ -71,6 +71,7 @@ anaconda-mode/
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff:
+.idea/
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
@@ -123,10 +124,10 @@ fabric.properties
 ### Intellij Patch ###
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
 
-# *.iml
+*.iml
 # modules.xml
-# .idea/misc.xml
-# *.ipr
+.idea/misc.xml
+*.ipr
 
 # Sonarlint plugin
 .idea/sonarlint
@@ -184,3 +185,4 @@ gradle-app.setting
 
 
 # End of https://www.gitignore.io/api/vim,java,emacs,gradle,intellij
+target/

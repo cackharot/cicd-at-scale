@@ -1,4 +1,4 @@
-package org.cackharot.jenkins.dsl
+package org.cackharot.jenkins.dsl.dsl
 
 import groovyx.net.http.ContentType
 import groovyx.net.http.HttpResponseDecorator
@@ -16,16 +16,15 @@ class RestApiJobManagement extends MockJobManagement {
 
     void setCredentials(String username, String password) {
         crumbHeaderSet = false
-        restClient.headers['Authorization'] = 'Basic ' + "$username:$password".bytes.encodeBase64()
+        restClient.headers.put('Authorization', "Basic ${"$username:$password".bytes.encodeBase64()}")
     }
 
     @Override
     String getConfig(String jobName) throws JobConfigurationNotFoundException {
-        String xml = fetchExistingXml(jobName)
+        String xml = fetchExistingXml(jobName, false)
         if (!xml) {
             throw new JobConfigurationNotFoundException(jobName)
         }
-
         xml
     }
 
@@ -86,10 +85,10 @@ class RestApiJobManagement extends MockJobManagement {
 
         setCrumbHeader()
         HttpResponseDecorator resp = restClient.post(
-            path: path,
-            body: xml,
-            query: [name: job],
-            requestContentType: 'application/xml'
+                path: path,
+                body: xml,
+                query: [name: job],
+                requestContentType: 'application/xml'
         )
 
         resp.status == 200
@@ -98,9 +97,9 @@ class RestApiJobManagement extends MockJobManagement {
     private boolean update(String name, String xml, boolean isView) {
         setCrumbHeader()
         HttpResponseDecorator resp = restClient.post(
-            path: getPath(name, isView) + '/config.xml',
-            body: xml,
-            requestContentType: 'application/xml'
+                path: getPath(name, isView) + '/config.xml',
+                body: xml,
+                requestContentType: 'application/xml'
         )
 
         resp.status == 200
@@ -109,9 +108,9 @@ class RestApiJobManagement extends MockJobManagement {
     private String fetchExistingXml(String name, boolean isView) {
         setCrumbHeader()
         HttpResponseDecorator resp = restClient.get(
-            contentType: ContentType.TEXT,
-            path: getPath(name, isView) + '/config.xml',
-            headers: [Accept: 'application/xml'],
+                contentType: ContentType.TEXT,
+                path: getPath(name, isView) + '/config.xml',
+                headers: [Accept: 'application/xml'],
         )
         resp?.data?.text
     }
