@@ -6,7 +6,7 @@ job('seed') {
     scm 'H/5 * * * *'
   }
   steps {
-    gradle 'clean test'
+    gradle 'clean build'
     dsl {
       external 'src/jobs/**/*Job.groovy'
       additionalClasspath 'src/main/groovy'
