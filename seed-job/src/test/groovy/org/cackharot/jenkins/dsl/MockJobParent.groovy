@@ -5,12 +5,12 @@ import javaposse.jobdsl.dsl.MemoryJobManagement
 
 class MockJobParent extends JobParent {
 
-    MockJobParent() {
-        setJm new MemoryJobManagement()
-    }
+  MockJobParent() {
+    setJm new MemoryJobManagement()
+  }
 
-    @Override
-    Object run() {
-        return null
-    }
+  @Override
+  Object run() {
+    return null
+  }
 }

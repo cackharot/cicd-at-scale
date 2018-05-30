@@ -94,7 +94,7 @@ test {
 }
 
 task rest(dependsOn: 'classes', type: JavaExec) {
-    main = 'RestApiJobUploader'
+    main = 'org.cackharot.jenkins.dsl.RestApiJobUploader'
     classpath = sourceSets.main.runtimeClasspath
     systemProperties System.getProperties()
 }
